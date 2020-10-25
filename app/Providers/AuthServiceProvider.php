@@ -4,6 +4,11 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use App\Models\Admin;
+use App\Models\Shareholder;
+use App\Policies\AdminPolicy;
+use App\Policies\ShareholderPolicy;
+
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -14,6 +19,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        Admin::class => AdminPolicy::class,
+        Shareholder::class => ShareholderPolicy::class,
     ];
 
     /**
@@ -25,6 +32,18 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        // defining gates for admin
+        Gate::define('create', 'App\Policies\AdminPolicy@create');
+        Gate::define('view', 'App\Policies\AdminPolicy@view');
+        Gate::define('view-any', 'App\Policies\AdminPolicy@viewAny');
+        Gate::define('update-admin', 'App\Policies\AdminPolicy@updateAdmin');
+        Gate::define('update-vote-item', 'App\Policies\AdminPolicy@updateVoteItem');
+        Gate::define('update-shareholder-isEligible', 'App\Policies\AdminPolicy@updateShareholderIsEligible');
+        Gate::define('delete-admin', 'App\Policies\AdminPolicy@deleteAdmin');
+        Gate::define('delete-vote-item', 'App\Policies\AdminPolicy@deleteVoteItem');
+
+        // defining gates for shareholders
+        Gate::define('view-vote-item', 'App\Policies\ShareholderPolicy@viewVoteItem');
+        Gate::define('updateShareholder', 'App\Policies\ShareholderPolicy@updateShareholder');
     }
 }

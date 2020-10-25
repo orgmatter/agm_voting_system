@@ -40,6 +40,14 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+        'shareholder' => [
+            'driver' => 'session',
+            'provider' => 'shareholders',
+        ],
 
         'api' => [
             'driver' => 'token',
@@ -70,6 +78,14 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
+        'shareholders' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Shareholder::class,
+        ],
 
         // 'users' => [
         //     'driver' => 'database',
@@ -99,6 +115,12 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        'admins' => [
+            'provider' => 'admins',
+        ],
+        'shareholders' => [
+            'provider' => 'shareholders',
+        ]
     ],
 
     /*
