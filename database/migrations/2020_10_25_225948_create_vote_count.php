@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVoteItemsTable extends Migration
+class CreateVoteCount extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateVoteItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('vote_items', function (Blueprint $table) {
+        Schema::create('vote_count', function (Blueprint $table) {
             $table->id();
-            $table->integer('company_id');
-            $table->integer('admin_id');
-            $table->string('name');
+            $table->integer('vote_item_id');
+            $table->integer('shareholder_id');
+            $table->string('votes');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateVoteItemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vote_items');
+        Schema::dropIfExists('vote_count');
     }
 }

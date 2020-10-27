@@ -3,6 +3,8 @@
 namespace App\Policies;
 
 use App\Models\Shareholder;
+use App\Models\VoteItem;
+use App\Models\VoteCount;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -16,9 +18,31 @@ class ShareholderPolicy
      * @param  \App\Models\Shareholder  $user
      * @return mixed
      */
-    public function viewVoteItem(Shareholder $shareholder)
+    public function viewVoteItem(Shareholder $shareholder, VoteItem $vote_item)
+    {
+        return $shareholder->company_id === $vote_item->company_id;
+    }
+
+    /**
+     * Determine whether the user can update the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Shareholder  $shareholder
+     * @return mixed
+     */
+    public function updateShareholder(Shareholder $shareholder)
+    {
+        return true;
+    }
+
+    public function shareholderVote(Shareholder $shareholder)
     {
         return $shareholder->isEligible === 1? true:false;
+    }
+
+    public function viewVoteCounts(Shareholder $shareholder, VoteCount $vote_count)
+    {
+        return $shareholder->id === $vote_count->shareholder_id;
     }
 
     /**
@@ -44,17 +68,6 @@ class ShareholderPolicy
         //
     }
 
-    /**
-     * Determine whether the user can update the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Shareholder  $shareholder
-     * @return mixed
-     */
-    public function updateShareholder(Shareholder $shareholder)
-    {
-        return true
-    }
 
     /**
      * Determine whether the user can delete the model.

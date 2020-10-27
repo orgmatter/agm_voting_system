@@ -10,7 +10,8 @@
             @endguest
         </title>
 
-        <link rel="stylesheet" href="{{ asset('css/admin.css') }}"></link>
+        <link rel="stylesheet" href="{{ asset('/css/app.css') }}"></link>
+        <link rel="stylesheet" href="{{ asset('/css/admin/app.css') }}"></link>
     </head>
 
 
@@ -22,6 +23,8 @@
             @yield('loginContent')
         @endguest
 
-        <script src="{{ asset('js/admin.js') }}"></script>
+
+        <script src="{{ asset('js/app.js') }}"></script>
+        <script src="{{ asset('js/admin/app.js') }}"></script>
     </body>
 </html>

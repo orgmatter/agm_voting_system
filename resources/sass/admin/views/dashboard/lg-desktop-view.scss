@@ -1,0 +1,24 @@
+@media only screen 
+and (min-width : 1024px) 
+and (max-width : 1839px) {
+    
+    .dashboard-content-container {
+        width: 100%;
+
+        .dashboard-content-cover {
+            width: 100%;
+
+            .dashboard-content-cover-flex {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+
+                .dashboard-content-cover-item {
+                    width: 70%;
+                    border: 1px solid red;
+                    height: 100vh;
+                }
+            }
+        }
+    }
+}

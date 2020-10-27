@@ -71,7 +71,10 @@ class AdminPolicy
 
     public function updateShareholderIsEligible(Admin $admin, Shareholder $shareholder) {
 
-        return $admin->isAdmin === 1 ? true:false;
+        $isAdmin = $admin->isAdmin === 1 ? true:false;
+        if($isAdmin) {
+            return $admin->id === $shareholder->admin_id;
+        }
     }
 
     /**

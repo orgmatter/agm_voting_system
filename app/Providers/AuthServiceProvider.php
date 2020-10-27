@@ -37,13 +37,15 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('view', 'App\Policies\AdminPolicy@view');
         Gate::define('view-any', 'App\Policies\AdminPolicy@viewAny');
         Gate::define('update-admin', 'App\Policies\AdminPolicy@updateAdmin');
-        Gate::define('update-vote-item', 'App\Policies\AdminPolicy@updateVoteItem');
-        Gate::define('update-shareholder-isEligible', 'App\Policies\AdminPolicy@updateShareholderIsEligible');
         Gate::define('delete-admin', 'App\Policies\AdminPolicy@deleteAdmin');
-        Gate::define('delete-vote-item', 'App\Policies\AdminPolicy@deleteVoteItem');
+        Gate::define('update-shareholder-isEligible', 'App\Policies\AdminPolicy@updateShareholderIsEligible');
 
         // defining gates for shareholders
+        Gate::define('update-shareholder', 'App\Policies\ShareholderPolicy@updateShareholder');
         Gate::define('view-vote-item', 'App\Policies\ShareholderPolicy@viewVoteItem');
-        Gate::define('updateShareholder', 'App\Policies\ShareholderPolicy@updateShareholder');
+        Gate::define('update-vote-item', 'App\Policies\AdminPolicy@updateVoteItem');
+        Gate::define('delete-vote-item', 'App\Policies\AdminPolicy@deleteVoteItem');
+        Gate::define('shareholder-vote', 'App\Policies\ShareholderPolicy@shareholderVote');
+        Gate::define('view-vote-count', 'App\Policies\ShareholderPolicy@viewVoteCounts');
     }
 }

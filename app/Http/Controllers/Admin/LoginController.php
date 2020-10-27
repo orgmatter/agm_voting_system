@@ -6,14 +6,17 @@ use App\Http\Controllers\Controller;
 use Illumnate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\LoginRequest;
+use App\Http\Services\Admin\AdminService;
 
 
 // this controller is meant to resolve the login route;
 class LoginController extends Controller
 {
-    
-    public function __construct() {
+    private $adminService;
+
+    public function __construct(AdminService $adminService) {
         $this->middleware('guest:admin');
+        $this->adminService = $adminService;
     }
 
     public function showLogin() {
@@ -26,9 +29,13 @@ class LoginController extends Controller
         $validated = $request->validated();
 
         if($validated) {
-            
-            if(Auth::attempt($request->only('email', 'password'))) {
+            $credentials = [
+                'email' => $request->email,
+                'password' => $request->password,
+            ];
 
+            $isLoggedIn = $this->adminService->login($credentials);
+            if($isLoggedIn) {
                 return redirect()->route('admin.dashboard');
             }
             return back()->withInput($request->except('password'));
