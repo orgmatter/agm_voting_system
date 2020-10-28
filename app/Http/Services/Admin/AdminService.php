@@ -98,12 +98,21 @@ class AdminService
         }
     }
 
+
+    // --> vote counts
+    // public function read_vote_counts()
+    // {
+    //     $distinct_votes = DB::table('vote_counts')->select('created_at', 'shareholder_id', 'vote_item_id', DB::raw('SUM(votes) as total_votes'))
+    //     ->groupBy('shareholder_id')
+    //     ->groupBy('vote_item_id')
+    //     ->groupBy('created_at')
+    //     ->get();
+    //     return $distinct_votes;
+    // }
+
     public function read_vote_counts()
     {
-        $distinct_votes = DB::table('vote_counts')->select('created_at', 'shareholder_id', 'vote_item_id', DB::raw('SUM(votes) as total_votes'))
-        ->groupBy('shareholder_id')
-        ->groupBy('vote_item_id')
-        ->groupBy('created_at')
-        ->get();
+        $distinct_votes = VoteCount::distinct('shareholder_id')->select('shareholder_id', 'vote_item_id', DB::raw('SUM(votes) as total_votes'))->groupBy('shareholder_id')->groupBy('vote_item_id')->get();
+        return $distinct_votes;
     }
 }

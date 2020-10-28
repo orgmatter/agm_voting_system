@@ -12,7 +12,8 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('admin.logout') }}">Logout</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                                <li class="breadcrumb-item" aria-current="page">Dashboard</li>
+                                <li class="breadcrumb-item active" aria-current="page">{{ $admin->firstname }}</li>
                             </ol>
                         </nav>
                     </div>
@@ -41,33 +42,39 @@
                                 <div class="tab-content" id="tabContent">
                                     <div class="tab-pane fade show active" id="settings" role="tabpanel" aria-labelledby="settings-tab">
                                         <div class="settings-form-container">
-                                            <div class="settings-form-cover-flex">
-                                                <div class="settings-form-cover-item">
-                                                    @if((session()->has('password_reset')) && (session()->get('password_reset') === 'password is reset'))
-                                                        <div class="alert alert-success">
-                                                            {{ session()->get('password_reset') }}
+
+                                            <div class="parent-settings-form-cover">
+                                                <div class="form-header">
+                                                    <p class="header-title">Reset Password</p>
+                                                </div>
+                                                <div class="settings-form-cover-flex">
+                                                    <div class="settings-form-cover-item">
+                                                        @if((session()->has('password_reset')) && (session()->get('password_reset') === 'password is reset'))
+                                                            <div class="alert alert-success">
+                                                                {{ session()->get('password_reset') }}
+                                                            </div>
+                                                        @endif
+                                                        <div class="form-cover-div">
+                                                            <form class="form-cover" id="setting-form" action="{{ route('admin.resetPassword') }}" method="post">
+                                                                @csrf
+                                                                @method('put')
+                                                                <div class="input-cover-flex">
+                                                                    <div class="input-cover-item">
+                                                                        <label for="old-password-input">Old Password:</label><br />
+                                                                        <input class="setting-input" id="old-password-input" type="password" name="old_password" placeholder="Old Password" required>
+                                                                    </div>
+                                                                    <div class="input-cover-item">
+                                                                        <label for="new-password-input">New Password:</label><br />
+                                                                        <input class="setting-input" id="new-password-input" type="password" name="new_password" placeholder="New Password" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="submit-btn-flex">
+                                                                    <div class="submit-btn-item">
+                                                                        <button class="submit-btn btn btn-primary" type="submit">Submit</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
                                                         </div>
-                                                    @endif
-                                                    <div class="form-cover-div">
-                                                        <form class="form-cover" id="setting-form" action="{{ route('admin.resetPassword') }}" method="post">
-                                                            @csrf
-                                                            @method('put')
-                                                            <div class="input-cover-flex">
-                                                                <div class="input-cover-item">
-                                                                    <label for="old-password-input">Old Password:</label><br />
-                                                                    <input class="setting-input" id="old-password-input" type="password" name="old_password" placeholder="Old Password" required>
-                                                                </div>
-                                                                <div class="input-cover-item">
-                                                                    <label for="new-password-input">New Password:</label><br />
-                                                                    <input class="setting-input" id="new-password-input" type="password" name="new_password" placeholder="New Password" required>
-                                                                </div>
-                                                            </div>
-                                                            <div class="submit-btn-flex">
-                                                                <div class="submit-btn-item">
-                                                                    <button class="submit-btn btn btn-primary" type="submit">Submit</button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
@@ -85,93 +92,105 @@
                                         <div class="tab-content" id="myTabContent">
                                             <div class="tab-pane fade show active" id="create-shareholders" role="tabpanel" aria-labelledby="shareholders-tab">
                                                 <div class="shareholders-form-container">
-                                                    <div class="shareholders-form-cover-flex">
-                                                        <div class="shareholders-form-cover-item">
-                                                            @if((session()->has('shareholder_created')) && (session()->get('shareholder_created') === 'password is reset'))
-                                                                <div class="alert alert-success">
-                                                                    {{ session()->get('shareholder_created') }}
+
+                                                    <div class="parent-shareholders-form-cover">
+                                                        <div class="form-header">
+                                                            <p class="header-title">Create Shareholders</p>
+                                                        </div>
+                                                        <div class="shareholders-form-cover-flex">
+                                                            <div class="shareholders-form-cover-item">
+                                                                @if((session()->has('shareholder_created')) && (session()->get('shareholder_created') === 'password is reset'))
+                                                                    <div class="alert alert-success">
+                                                                        {{ session()->get('shareholder_created') }}
+                                                                    </div>
+                                                                @endif
+                                                                <div class="form-cover-div">
+                                                                    <form class="form-cover" id="shareholder-form" action="{{ route('admin.createShareholder') }}" method="post">
+                                                                        @csrf
+                                                                        <div class="input-cover-flex">
+                                                                            <div class="input-cover-item">
+                                                                                <label for="firstname-input">Firstname:</label><br />
+                                                                                <input class="shareholder-input" id="firstname-input" type="text" name="firstname" placeholder="Firstname" required>
+                                                                            </div>
+                                                                            <div class="input-cover-item">
+                                                                                <label for="lastname-input">Lastname:</label><br />
+                                                                                <input class="shareholder-input" id="lastname-input" type="text" name="lastname" placeholder="Lastname" required>
+                                                                            </div>
+                                                                            <div class="input-cover-item">
+                                                                                <label for="email-input">Email:</label><br />
+                                                                                <input class="shareholder-input" id="email-input" type="text" name="email" placeholder="Email" required>
+                                                                            </div>
+                                                                            <div class="input-cover-item">
+                                                                                <label for="password-input">Password:</label><br />
+                                                                                <input class="shareholder-input" id="password-input" type="password" name="password" placeholder="Password" required>
+                                                                            </div>
+                                                                            <div class="input-cover-item">
+                                                                                <label for="units-input">Units:</label><br />
+                                                                                <input class="shareholder-input" id="units-input" type="text" name="units" placeholder="Units" required>
+                                                                            </div>
+                                                                            <div class="input-cover-item">
+                                                                                <label for="company-input">Companies:</label><br />
+                                                                                <select class="shareholder-input" id="company-input" name="company_id" required>
+                                                                                    <option value="" selected>Choose a company</option>
+                                                                                    @if($companies)
+                                                                                        @foreach($companies as $company)
+                                                                                            <option value="{{ $company->id }}">{{ $company->name }}</option>
+                                                                                        @endforeach
+                                                                                    @endif
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="submit-btn-flex">
+                                                                            <div class="submit-btn-item">
+                                                                                <button class="submit-btn btn btn-primary" type="submit">Submit</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
                                                                 </div>
-                                                            @endif
-                                                            <div class="form-cover-div">
-                                                                <form class="form-cover" id="shareholder-form" action="{{ route('admin.createShareholder') }}" method="post">
-                                                                    @csrf
-                                                                    <div class="input-cover-flex">
-                                                                        <div class="input-cover-item">
-                                                                            <label for="firstname-input">Firstname:</label><br />
-                                                                            <input class="shareholder-input" id="firstname-input" type="text" name="firstname" placeholder="Firstname" required>
-                                                                        </div>
-                                                                        <div class="input-cover-item">
-                                                                            <label for="lastname-input">Lastname:</label><br />
-                                                                            <input class="shareholder-input" id="lastname-input" type="text" name="lastname" placeholder="Lastname" required>
-                                                                        </div>
-                                                                        <div class="input-cover-item">
-                                                                            <label for="email-input">Email:</label><br />
-                                                                            <input class="shareholder-input" id="email-input" type="text" name="email" placeholder="Email" required>
-                                                                        </div>
-                                                                        <div class="input-cover-item">
-                                                                            <label for="password-input">Password:</label><br />
-                                                                            <input class="shareholder-input" id="password-input" type="password" name="password" placeholder="Password" required>
-                                                                        </div>
-                                                                        <div class="input-cover-item">
-                                                                            <label for="units-input">Units:</label><br />
-                                                                            <input class="shareholder-input" id="units-input" type="text" name="units" placeholder="Units" required>
-                                                                        </div>
-                                                                        <div class="input-cover-item">
-                                                                            <label for="company-input">Companies:</label><br />
-                                                                            <select class="shareholder-input" id="company-input" name="company_id" required>
-                                                                                <option value="" selected>Choose a company</option>
-                                                                                @if($companies)
-                                                                                    @foreach($companies as $company)
-                                                                                        <option value="{{ $company->id }}">{{ $company->name }}</option>
-                                                                                    @endforeach
-                                                                                @endif
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="submit-btn-flex">
-                                                                        <div class="submit-btn-item">
-                                                                            <button class="submit-btn btn btn-primary" type="submit">Submit</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="tab-pane fade" id="create-vote-items" role="tabpanel" aria-labelledby="vote-items-tab">
-                                                <div class="shareholders-form-container">
-                                                    <div class="shareholders-form-cover-flex">
-                                                        <div class="shareholders-form-cover-item">
-                                                            <div class="form-cover-div">
-                                                                <form class="form-cover" id="vote-item-form" action="{{ route('admin.createVote') }}" method="post">
-                                                                    @csrf
-                                                                    <div class="input-cover-flex">
-                                                                        <div class="input-cover-item">
-                                                                            <label for="vote-name-input">Name of Vote:</label><br />
-                                                                            <input class="vote-item-input" id="vote-name-input" type="text" name="vote_name" placeholder="Name of Vote" required>
+                                                <div class="vote-item-form-container">
+
+                                                    <div class="parent-vote-item-form-cover">
+                                                        <div class="form-header">
+                                                            <p class="header-title">Create Vote Items</p>
+                                                        </div>
+                                                        <div class="vote-item-form-cover-flex">
+                                                            <div class="vote-item-form-cover-item">
+                                                                <div class="form-cover-div">
+                                                                    <form class="form-cover" id="vote-item-form" action="{{ route('admin.createVote') }}" method="post">
+                                                                        @csrf
+                                                                        <div class="input-cover-flex">
+                                                                            <div class="input-cover-item">
+                                                                                <label for="vote-name-input">Name of Vote:</label><br />
+                                                                                <input class="vote-item-input" id="vote-name-input" type="text" name="vote_name" placeholder="Name of Vote" required>
+                                                                            </div>
+                                                                            <div class="input-cover-item">
+                                                                                <label for="company-input">Companies:</label><br />
+                                                                                <select class="vote-item-input" id="company-input" name="company_id" required>
+                                                                                    <option value="" selected>Choose a company</option>
+                                                                                    @if($companies)
+                                                                                        @foreach($companies as $company)
+                                                                                            <option value="{{ $company->id }}">{{ $company->name }}</option>
+                                                                                        @endforeach
+                                                                                    @endif
+                                                                                </select>
+                                                                            </div>
                                                                         </div>
-                                                                        <div class="input-cover-item">
-                                                                            <label for="company-input">Companies:</label><br />
-                                                                            <select class="shareholder-input" id="company-input" name="company_id" required>
-                                                                                <option value="" selected>Choose a company</option>
-                                                                                @if($companies)
-                                                                                    @foreach($companies as $company)
-                                                                                        <option value="{{ $company->id }}">{{ $company->name }}</option>
-                                                                                    @endforeach
-                                                                                @endif
-                                                                            </select>
+                                                                        <div class="submit-btn-flex">
+                                                                            <div class="submit-btn-item">
+                                                                                <button class="submit-btn btn btn-primary" type="submit">Submit</button>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="submit-btn-flex">
-                                                                        <div class="submit-btn-item">
-                                                                            <button class="submit-btn btn btn-primary" type="submit">Submit</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
+                                                                    </form>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div>    
                                                 </div>
                                             </div>
                                         </div>
@@ -272,7 +291,9 @@
                                                                                 <th scope="col">#</th>
                                                                                 <th scope="col">Name of  Shareholder</th>
                                                                                 <th scope="col">Name of Votes</th>
+                                                                                <th scope="col">Total units</th>
                                                                                 <th scope="col">Votes Casted</th>
+                                                                                <th scope="col">Unit bal</th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
@@ -280,9 +301,11 @@
                                                                                 @foreach($distinct_votes as $distinct_vote)
                                                                                     <tr>
                                                                                         <th scope="col"></th>
-                                                                                        <td>{{ $shareholders[$distinct_votes->shareholder_id]['firstname'] }} {{ $shareholders[$distinct_votes->shareholder_id]['lastname'] }}</td>
-                                                                                        <td>{{ $shareholders[$distinct_votes->vote_item_id]['name'] }}</td>
-                                                                                        <td>{{ $distinct_vote->total_votes }}</td>
+                                                                                        <td>{{ $shareholders->find($distinct_vote->shareholder_id)->firstname }} {{ $shareholders->find($distinct_vote->shareholder_id)->lastname }}</td>
+                                                                                        <td>{{ $vote_items->find($distinct_vote->vote_item_id)->name }}</td>
+                                                                                        <td>{{ ($shareholders->find($distinct_vote->shareholder_id)->units + $distinct_vote->total_votes) }}</td>
+                                                                                        <td>{{ $distinct_vote->total_votes }} coins</td>
+                                                                                        <td>{{ $shareholders->find($distinct_vote->shareholder_id)->units }}</td>
                                                                                     </tr>
                                                                                 @endforeach
                                                                             @endif
@@ -299,7 +322,7 @@
                                     <div class="tab-pane fade" id="edit" role="tabpanel" aria-labelledby="edit-tab">
                                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                                             <li class="nav-item" role="presentation">
-                                                <a class="nav-link" id="edit-vote-items-tab" data-toggle="tab" href="#edit-vote-items" role="tab" aria-controls="vote-items" aria-selected="false">Vote Items</a>
+                                                <a class="nav-link" id="edit-vote-items-tab" data-toggle="tab" href="#edit-vote-items" role="tab" aria-controls="vote-items" aria-selected="true">Vote Items</a>
                                             </li>
                                         </ul>
                                         <div class="tab-content" id="myTabContent">

@@ -30,10 +30,11 @@ class DashboardController extends Controller
         $shareholders = $this->adminService->read_shareholders();
         $vote_items = $this->adminService->read_vote_items();
         $distinct_votes = $this->adminService->read_vote_counts();
+        $admin = Auth::guard('admin')->user();
 
-        // return $vote_items;
+        // return $distinct_votes;
 
-        return view('admin.dashboard', ['companies' => $companies, 'shareholders' => $shareholders, 'vote_items' => $vote_items, 'distinct_votes' => $distinct_votes]);
+        return view('admin.dashboard', ['companies' => $companies, 'shareholders' => $shareholders, 'vote_items' => $vote_items, 'distinct_votes' => $distinct_votes, 'admin' => $admin]);
     }
 
     public function create_shareholder(Request $request)

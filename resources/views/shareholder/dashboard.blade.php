@@ -12,7 +12,8 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('shareholder.logout') }}">Logout</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                                <li class="breadcrumb-item" aria-current="page">Dashboard</li>
+                                <li class="breadcrumb-item active" aria-current="page">{{ $shareholder->firstname }}</li>
                             </ol>
                         </nav>
                     </div>
@@ -32,33 +33,39 @@
                                 <div class="tab-content" id="tabContent">
                                     <div class="tab-pane fade show active" id="settings" role="tabpanel" aria-labelledby="settings-tab">
                                         <div class="settings-form-container">
-                                            <div class="settings-form-cover-flex">
-                                                <div class="settings-form-cover-item">
-                                                    @if(session()->has('password_reset'))
-                                                        <div class="alert alert-success">
-                                                            {{ session()->get('password_reset') }}
+
+                                            <div class="parent-settings-form-cover">
+                                                <div class="form-header">
+                                                    <p class="header-title">Reset Password</p>
+                                                </div>
+                                                <div class="settings-form-cover-flex">
+                                                    <div class="settings-form-cover-item">
+                                                        @if(session()->has('password_reset'))
+                                                            <div class="alert alert-success">
+                                                                {{ session()->get('password_reset') }}
+                                                            </div>
+                                                        @endif
+                                                        <div class="form-cover-div">
+                                                            <form class="form-cover" id="setting-form" action="{{ route('shareholder.resetPassword') }}" method="post">
+                                                                @csrf
+                                                                @method('put')
+                                                                <div class="input-cover-flex">
+                                                                    <div class="input-cover-item">
+                                                                        <label for="old-password-input">Old Password:</label><br />
+                                                                        <input class="setting-input" id="old-password-input" type="password" name="old_password" placeholder="Old Password" required>
+                                                                    </div>
+                                                                    <div class="input-cover-item">
+                                                                        <label for="new-password-input">New Password:</label><br />
+                                                                        <input class="setting-input" id="new-password-input" type="password" name="new_password" placeholder="New Password" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="submit-btn-flex">
+                                                                    <div class="submit-btn-item">
+                                                                        <button class="submit-btn btn btn-primary" type="submit">Submit</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
                                                         </div>
-                                                    @endif
-                                                    <div class="form-cover-div">
-                                                        <form class="form-cover" id="setting-form" action="{{ route('shareholder.resetPassword') }}" method="post">
-                                                            @csrf
-                                                            @method('put')
-                                                            <div class="input-cover-flex">
-                                                                <div class="input-cover-item">
-                                                                    <label for="old-password-input">Old Password:</label><br />
-                                                                    <input class="setting-input" id="old-password-input" type="password" name="old_password" placeholder="Old Password" required>
-                                                                </div>
-                                                                <div class="input-cover-item">
-                                                                    <label for="new-password-input">New Password:</label><br />
-                                                                    <input class="setting-input" id="new-password-input" type="password" name="new_password" placeholder="New Password" required>
-                                                                </div>
-                                                            </div>
-                                                            <div class="submit-btn-flex">
-                                                                <div class="submit-btn-item">
-                                                                    <button class="submit-btn btn btn-primary" type="submit">Submit</button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
