@@ -43,23 +43,28 @@
                                         <div class="settings-form-container">
                                             <div class="settings-form-cover-flex">
                                                 <div class="settings-form-cover-item">
+                                                    @if((session()->has('password_reset')) && (session()->get('password_reset') === 'password is reset'))
+                                                        <div class="alert alert-success">
+                                                            {{ session()->get('password_reset') }}
+                                                        </div>
+                                                    @endif
                                                     <div class="form-cover-div">
-                                                        <form class="form-cover" id="setting-form" action="" method="post">
+                                                        <form class="form-cover" id="setting-form" action="{{ route('admin.resetPassword') }}" method="post">
                                                             @csrf
                                                             @method('put')
                                                             <div class="input-cover-flex">
                                                                 <div class="input-cover-item">
                                                                     <label for="old-password-input">Old Password:</label><br />
-                                                                    <input class="setting-input" id="old-password-input" type="password" placeholder="Old Password" required>
+                                                                    <input class="setting-input" id="old-password-input" type="password" name="old_password" placeholder="Old Password" required>
                                                                 </div>
                                                                 <div class="input-cover-item">
                                                                     <label for="new-password-input">New Password:</label><br />
-                                                                    <input class="setting-input" id="new-password-input" type="password" placeholder="New Password" required>
+                                                                    <input class="setting-input" id="new-password-input" type="password" name="new_password" placeholder="New Password" required>
                                                                 </div>
                                                             </div>
                                                             <div class="submit-btn-flex">
                                                                 <div class="submit-btn-item">
-                                                                    <button class="submit-btn btn btn-primary" type="button">Submit</button>
+                                                                    <button class="submit-btn btn btn-primary" type="submit">Submit</button>
                                                                 </div>
                                                             </div>
                                                         </form>
@@ -82,29 +87,38 @@
                                                 <div class="shareholders-form-container">
                                                     <div class="shareholders-form-cover-flex">
                                                         <div class="shareholders-form-cover-item">
+                                                            @if((session()->has('shareholder_created')) && (session()->get('shareholder_created') === 'password is reset'))
+                                                                <div class="alert alert-success">
+                                                                    {{ session()->get('shareholder_created') }}
+                                                                </div>
+                                                            @endif
                                                             <div class="form-cover-div">
-                                                                <form class="form-cover" id="shareholder-form" action="" method="post">
+                                                                <form class="form-cover" id="shareholder-form" action="{{ route('admin.createShareholder') }}" method="post">
                                                                     @csrf
                                                                     <div class="input-cover-flex">
                                                                         <div class="input-cover-item">
                                                                             <label for="firstname-input">Firstname:</label><br />
-                                                                            <input class="shareholder-input" id="firstname-input" type="text" placeholder="Firstname" required>
+                                                                            <input class="shareholder-input" id="firstname-input" type="text" name="firstname" placeholder="Firstname" required>
                                                                         </div>
                                                                         <div class="input-cover-item">
                                                                             <label for="lastname-input">Lastname:</label><br />
-                                                                            <input class="shareholder-input" id="lastname-input" type="text" placeholder="Lastname" required>
+                                                                            <input class="shareholder-input" id="lastname-input" type="text" name="lastname" placeholder="Lastname" required>
                                                                         </div>
                                                                         <div class="input-cover-item">
                                                                             <label for="email-input">Email:</label><br />
-                                                                            <input class="shareholder-input" id="email-input" type="text" placeholder="Email" required>
+                                                                            <input class="shareholder-input" id="email-input" type="text" name="email" placeholder="Email" required>
                                                                         </div>
                                                                         <div class="input-cover-item">
                                                                             <label for="password-input">Password:</label><br />
-                                                                            <input class="shareholder-input" id="password-input" type="text" placeholder="Password" required>
+                                                                            <input class="shareholder-input" id="password-input" type="password" name="password" placeholder="Password" required>
+                                                                        </div>
+                                                                        <div class="input-cover-item">
+                                                                            <label for="units-input">Units:</label><br />
+                                                                            <input class="shareholder-input" id="units-input" type="text" name="units" placeholder="Units" required>
                                                                         </div>
                                                                         <div class="input-cover-item">
                                                                             <label for="company-input">Companies:</label><br />
-                                                                            <select class="shareholder-input" id="company-input" required>
+                                                                            <select class="shareholder-input" id="company-input" name="company_id" required>
                                                                                 <option value="" selected>Choose a company</option>
                                                                                 @if($companies)
                                                                                     @foreach($companies as $company)
@@ -116,7 +130,7 @@
                                                                     </div>
                                                                     <div class="submit-btn-flex">
                                                                         <div class="submit-btn-item">
-                                                                            <button class="submit-btn btn btn-primary" type="button">Submit</button>
+                                                                            <button class="submit-btn btn btn-primary" type="submit">Submit</button>
                                                                         </div>
                                                                     </div>
                                                                 </form>
@@ -130,16 +144,16 @@
                                                     <div class="shareholders-form-cover-flex">
                                                         <div class="shareholders-form-cover-item">
                                                             <div class="form-cover-div">
-                                                                <form class="form-cover" id="vote-item-form" action="" method="post">
+                                                                <form class="form-cover" id="vote-item-form" action="{{ route('admin.createVote') }}" method="post">
                                                                     @csrf
                                                                     <div class="input-cover-flex">
                                                                         <div class="input-cover-item">
                                                                             <label for="vote-name-input">Name of Vote:</label><br />
-                                                                            <input class="vote-item-input" id="vote-name-input" type="text" placeholder="Name of Vote" required>
+                                                                            <input class="vote-item-input" id="vote-name-input" type="text" name="vote_name" placeholder="Name of Vote" required>
                                                                         </div>
                                                                         <div class="input-cover-item">
                                                                             <label for="company-input">Companies:</label><br />
-                                                                            <select class="shareholder-input" id="company-input" required>
+                                                                            <select class="shareholder-input" id="company-input" name="company_id" required>
                                                                                 <option value="" selected>Choose a company</option>
                                                                                 @if($companies)
                                                                                     @foreach($companies as $company)
@@ -151,7 +165,7 @@
                                                                     </div>
                                                                     <div class="submit-btn-flex">
                                                                         <div class="submit-btn-item">
-                                                                            <button class="submit-btn btn btn-primary" type="button">Submit</button>
+                                                                            <button class="submit-btn btn btn-primary" type="submit">Submit</button>
                                                                         </div>
                                                                     </div>
                                                                 </form>
@@ -189,25 +203,25 @@
                                                                         <th scope="col">Email</th>
                                                                         <th scope="col">Units</th>
                                                                         <th scope="col">Compnay</th>
-                                                                        <th scope="col" colspan="2">Action</th>
+                                                                        <!-- <th scope="col" colspan="2">Action</th> -->
                                                                     </tr>
                                                                 </thead>
-                                                                @if($shareholders && $companies)
-                                                                    @foreach($shareholders as $shareholder)
-                                                                        <tbody>
+                                                                <tbody>
+                                                                    @if($shareholders && $companies)
+                                                                        @foreach($shareholders as $shareholder)
                                                                             <tr>
-                                                                                <th scope="row">#</th>
+                                                                                <th scope="row"></th>
                                                                                 <td>{{ $shareholder->firstname }}</td>
                                                                                 <td>{{ $shareholder->lastname }}</td>
                                                                                 <td>{{ $shareholder->email }}</td>
                                                                                 <td>{{ $shareholder->units }}</td>
                                                                                 <td>{{ $companies[$shareholder->company_id]['name'] }}</td>
-                                                                                <td>Button 1</td>
-                                                                                <td>Button 2</td>
+                                                                                <!-- <td>Button 1</td>
+                                                                                <td>Button 2</td> -->
                                                                             </tr>
-                                                                        </tbody>
-                                                                    @endforeach
-                                                                @endif
+                                                                        @endforeach
+                                                                    @endif
+                                                                </tbody>
                                                             </table>
                                                         </div>
                                                     </div>
@@ -224,28 +238,62 @@
                                                                         <th scope="col">#</th>
                                                                         <th scope="col">Name of Vote</th>
                                                                         <th scope="col">Compnay</th>
-                                                                        <th scope="col" colspan="2">Action</th>
+                                                                        <!-- <th scope="col" colspan="2">Action</th> -->
                                                                     </tr>
                                                                 </thead>
-                                                                @if($vote_items && $companies)
-                                                                    @foreach($vote_items as $vote_item)
-                                                                        <tbody>
+                                                                <tbody>
+                                                                    @if($vote_items && $companies)
+                                                                        @foreach($vote_items as $vote_item)
                                                                             <tr>
                                                                                 <th scope="row"></th>
                                                                                 <td>{{ $vote_item->name }}</td>
                                                                                 <td>{{ $companies[$vote_item->company_id]['name'] }}</td>
-                                                                                <td>Button 1</td>
-                                                                                <td>Button 2</td>
+                                                                                <!-- <td>Button 1</td>
+                                                                                <td>Button 2</td> -->
                                                                             </tr>
-                                                                        </tbody>
-                                                                    @endforeach
-                                                                @endif
+                                                                        @endforeach
+                                                                    @endif
+                                                                </tbody>
                                                             </table>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="tab-pane fade" id="views-vote-counts" role="tabpanel" aria-labelledby="vote-counts-tab">...</div>
+                                            <div class="tab-pane fade" id="views-vote-counts" role="tabpanel" aria-labelledby="vote-counts-tab">
+                                                <div class="dashboard-vote-count-container">
+                                                    <div class="dashboard-vote-count-cover-flex">
+                                                        <div class="dashboard-vote-count-cover-item">
+                                                            <div class="dashboard-vote-count-table-cover">
+                                                                <div class="table-responsive">
+                                                                    <table class="table table-striped">
+                                                                        <caption>List of votes casted</caption>
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th scope="col">#</th>
+                                                                                <th scope="col">Name of  Shareholder</th>
+                                                                                <th scope="col">Name of Votes</th>
+                                                                                <th scope="col">Votes Casted</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            @if($distinct_votes && $shareholders && $vote_items)
+                                                                                @foreach($distinct_votes as $distinct_vote)
+                                                                                    <tr>
+                                                                                        <th scope="col"></th>
+                                                                                        <td>{{ $shareholders[$distinct_votes->shareholder_id]['firstname'] }} {{ $shareholders[$distinct_votes->shareholder_id]['lastname'] }}</td>
+                                                                                        <td>{{ $shareholders[$distinct_votes->vote_item_id]['name'] }}</td>
+                                                                                        <td>{{ $distinct_vote->total_votes }}</td>
+                                                                                    </tr>
+                                                                                @endforeach
+                                                                            @endif
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="edit" role="tabpanel" aria-labelledby="edit-tab">
@@ -255,12 +303,12 @@
                                             </li>
                                         </ul>
                                         <div class="tab-content" id="myTabContent">
-                                            <div class="tab-pane fade show active" id="edit-shareholders" role="tabpanel" aria-labelledby="shareholders-tab"></div>
-                                            <div class="tab-pane fade" id="edit-vote-items" role="tabpanel" aria-labelledby="vote-items-tab">
+                                            <!-- <div class="tab-pane fade show active" id="edit-shareholders" role="tabpanel" aria-labelledby="shareholders-tab"></div> -->
+                                            <div class="tab-pane fade show active" id="edit-vote-items" role="tabpanel" aria-labelledby="vote-items-tab">
                                                 @if($vote_items && $companies)
                                                     @foreach($vote_items as $vote_item)
                                                         <div class="table-responsive">
-                                                            <form class="form-cover" id="vote-item-form" action="" method="post">
+                                                            <form class="form-cover" id="vote-item-form" action="{{ route('admin.editVote', ['id' => $vote_item->id]) }}" method="post">
                                                             @csrf
                                                             @method('put')
                                                                 <table class="table table-striped">
@@ -275,11 +323,10 @@
                                                                     </thead>
                                                                     <tbody>
                                                                         <tr>
-                                                                            <th scope="row">#</th>
-                                                                            <td><input class="vote-item-input" id="vote-name-input" type="text" value="{{ $vote_item->name }}" placeholder="Name of Vote" required></td>
-                                                                            <td><select class="vote-item-input" id=""><option value="{{ $vote_item->company_id }}" selected>{{ $companies[$vote_item->company_id]['name'] }}</select></td>
-                                                                            <td>Button 1</td>
-                                                                            <td>Button 2</td>
+                                                                            <th scope="row"></th>
+                                                                            <td><input class="vote-item-input" id="vote-name-input" type="text" value="{{ $vote_item->name }}" placeholder="Name of Vote" name="vote_name" required></td>
+                                                                            <td><select class="vote-item-input" id="" name="company_id"><option value="{{ $vote_item->company_id }}" selected>{{ $companies[$vote_item->company_id]['name'] }}</select></td>
+                                                                            <td><button class="edit-vote-item-btn btn btn-primary" type="submit">Edit</button</td>
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>

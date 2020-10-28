@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVoteItems extends Migration
+class CreateVoteItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,8 +15,8 @@ class CreateVoteItems extends Migration
     {
         Schema::create('vote_items', function (Blueprint $table) {
             $table->id();
-            $table->integer('company_id');
-            $table->integer('admin_id');
+            $table->foreignId('company_id');
+            $table->foreignId('admin_id');
             $table->string('name');
             $table->timestamps();
         });

@@ -21,9 +21,12 @@ class LoginController extends Controller
 
 
     //--> shareholder login to dashboard
-    public function login(LoginRequest $request) {
+    public function login(Request $request) {
 
-        $validated = $request->validated();
+        $validated = $request->validate([
+            'email' => 'required',
+            'password' => 'required'
+        ]);
 
         if($validated) {
             $credentials = [

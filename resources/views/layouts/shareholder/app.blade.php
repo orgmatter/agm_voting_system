@@ -2,10 +2,10 @@
 <html>
     <head>
         <title>
-            @auth('admin')
+            @auth('shareholder')
                 @yield('dashboardTitle')
             @endauth
-            @guest('admin')
+            @guest('shareholder')
                 @yield('loginTitle')
             @endguest
         </title>
@@ -16,10 +16,10 @@
 
 
     <body>
-        @auth('admin')
+        @auth('shareholder')
             @yield('dashboardContent')
         @endauth
-        @guest('admin')
+        @guest('shareholder')
             @yield('loginContent')
         @endguest
 

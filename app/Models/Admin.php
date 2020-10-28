@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Shareholder;
+use App\Models\VoteItem;
 
 class Admin extends Authenticatable
 {
@@ -34,4 +36,14 @@ class Admin extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    public function shareholders()
+    {
+        return $this->hasMany(Shareholder::class);
+    }
+
+    public function vote_items()
+    {
+        return $this->hasMany(VoteItem::class);
+    }
 }

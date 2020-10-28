@@ -15,8 +15,8 @@ class CreateShareholdersTable extends Migration
     {
         Schema::create('shareholders', function (Blueprint $table) {
             $table->id();
-            $table->integer('company_id');
-            $table->integer('admin_id');
+            $table->foreignId('company_id');
+            $table->foreignId('admin_id');
             $table->string('firstname');
             $table->string('lastname');
             $table->string('email');

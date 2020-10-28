@@ -1,10 +1,11 @@
 <?php
 namespace App\Http\Services\Shareholder;
 
-use App\Models\Shareholders;
+use App\Models\Shareholder;
 use App\Models\VoteItem;
 use App\Models\VoteCount;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ShareholderService
 {
@@ -16,29 +17,34 @@ class ShareholderService
         }
     }
 
-    public function reset_password(string $password, int $id)
+    public function reset_password(string $old_password, string $new_password, int $id)
     {
         $shareholder = Shareholder::find($id);
-        $isUpdateShareholder = $shareholder->update(['password' => $password]);
-        if($isUpdateShareholder) {
-            return $isUpdateShareholder;
+
+        if(Hash::check($old_password, $shareholder->password)) {
+            $hashed_new_password = Hash::make($new_password);
+            $isPasswordUpdated = $shareholder->update(['password' => $hashed_new_password]);
+            if($isPasswordUpdated) {
+                return $isPasswordUpdated;
+            }
         }
     }
 
     public function read_company_votes(int $company_id)
     {
-        $company_votes = VoteItem::where('company_id', $company_id)->first();
+        $company_votes = VoteItem::where('company_id', $company_id)->get();
         if($company_votes) {
             return $company_votes;
         }
     }
 
-    public function on_vote(array $credentials)
+    public function on_vote(array $credentials, int $id)
     {
-        $vote_count = VoteCount::create($credentials);
+        $shareholder = Shareholder::find($id);
+        $vote_count = $shareholder->vote_counts()->create($credentials);
         if($vote_count) {
-            $shareholder = Shareholder::find($credentials['shareholder_id']);
-            $shareholder_bal = $shareholder->update(['units' => ($shareholder->units - 1)]);
+            $new_units = $shareholder->units - $credentials['votes'];
+            $shareholder_bal = $shareholder->update(['units' => $new_units]);
             return $shareholder_bal;
         }
     }

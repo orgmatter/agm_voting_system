@@ -10,6 +10,12 @@ class VoteItem extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'company_id',
+        'admin_id',
+    ];
+
     public function company() {
         return $this->belongsTo(Comapny::class);
     }
@@ -17,5 +23,10 @@ class VoteItem extends Model
     public function vote_count()
     {
         return $this->hasMany(VoteCount::class);
+    }
+
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class);
     }
 }

@@ -29,11 +29,14 @@ class DashboardController extends Controller
         $companies = $this->adminService->read_companies();
         $shareholders = $this->adminService->read_shareholders();
         $vote_items = $this->adminService->read_vote_items();
+        $distinct_votes = $this->adminService->read_vote_counts();
 
-        return view('admin.dashboard', ['companies' => $companies, 'shareholders' => $shareholders, 'vote_items' => $vote_items]);
+        // return $vote_items;
+
+        return view('admin.dashboard', ['companies' => $companies, 'shareholders' => $shareholders, 'vote_items' => $vote_items, 'distinct_votes' => $distinct_votes]);
     }
 
-    public function create_shareholder(DashboardRequest $request)
+    public function create_shareholder(Request $request)
     {
         $isValidated = $request->validate([
             'firstname' => 'required',
@@ -41,6 +44,7 @@ class DashboardController extends Controller
             'email' => 'required',
             'password' => 'required',
             'units' => 'required',
+            'company_id' => 'required'
         ]);
 
         if($isValidated) {
@@ -50,11 +54,14 @@ class DashboardController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'units' => $request->units,
+                'company_id' => $request->company_id,
+                'isEligible' => true,
             ];
 
-            $shareholder = $this->adminService->create_shareholder($credentials);
+            $admin_id = $request->user()->id;
+            $shareholder = $this->adminService->create_shareholder($credentials, $admin_id);
             if($credentials) {
-                return back()->with('message', 'shareholder created');
+                return back()->with('shareholder_created', 'shareholder created');
             }
         }
     }
@@ -67,10 +74,10 @@ class DashboardController extends Controller
         }
     }
 
-    public function create_vote(DashboardRequest $request)
+    public function create_vote(Request $request)
     {
         $isValidated = $request->validate([
-            'name' => 'required',
+            'vote_name' => 'required',
             'company_id' => 'required',
         ]);
 
@@ -78,19 +85,24 @@ class DashboardController extends Controller
             $credentials = [
                 'name' => $request->vote_name,
                 'company_id' => $request->company_id,
-                'admin_id' => $request->user('id'),
             ];
 
-            $vote = $this->adminService->create_vote($credentials);
+            $admin_id = $request->user()->id;
+            $vote = $this->adminService->create_vote($credentials, $admin_id);
             if($vote) {
                 return back()->with('message', 'vote created');
             }
         }
     }
 
-    public function update_vote(DashboardRequest $request, $id)
+    public function update_vote(Request $request, $id)
     {
-        $isUpdated = $this->adminService->update_vote($request->input(), $id);
+        $credentials = [
+            'name' => $request->vote_name,
+            'company_id' => $request->company_id,
+        ];
+
+        $isUpdated = $this->adminService->update_vote($credentials, $id);
         if($isUpdated) {
             return back()->with('message', 'vote updated');
         }
@@ -106,11 +118,12 @@ class DashboardController extends Controller
 
     public function reset_password(DashboardRequest $request)
     {
-        $user_id = $request->user('id');
-        $password = $request->password;
-        $isReset = $this->adminService->reset_password($password, $user_id);
-        if($isReset) {
-            return back()->with('message', 'password is reset');
+        $user_id = $request->user()->id;
+        $old_password = $request->old_password;
+        $new_password = $request->new_password;
+        $isPasswordReset = $this->adminService->reset_password($old_password, $new_password, $user_id);
+        if($isPasswordReset) {
+            return back()->with('password_reset', 'password is reset');
         }
     }
 

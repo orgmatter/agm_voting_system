@@ -36,7 +36,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
     Route::get('dashboard/edit_vote', [AdminDashboardController::class, 'show_edit_vote'])->name('showEditVote');
     Route::put('dashboard/vote/edit/{id}', [AdminDashboardController::class, 'update_vote'])->name('editVote');
     Route::delete('dashboard/vote/{id}', [AdminDashboardController::class, 'delete_vote'])->name('deleteVote');
-    Route::post('dashboard/reset_password', [AdminDashboardController::class, 'reset_password'])->name('resetPassword');
+    Route::put('dashboard/reset_password', [AdminDashboardController::class, 'reset_password'])->name('resetPassword');
     Route::get('dashboard/logout', [AdminDashboardController::class, 'logout'])->name('logout');
 });
 
@@ -45,11 +45,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
 Route::group(['prefix' => 'shareholder', 'as' => 'shareholder.'], function() {
     
     Route::get('/', [ShareholderAuthController::class, 'shareholder']);
-    Route::get('login', [ShareholderLoginController::class, 'showLogin'])->name('showLogin');
+    Route::get('login/show', [ShareholderLoginController::class, 'showLogin'])->name('showLogin');
     Route::post('login', [ShareholderLoginController::class, 'login'])->name('login');
     Route::get('dashboard', [ShareholderDashboardController::class, 'dashboard'])->name('dashboard');
-    Route::post('dashboard/reset_password', [ShareholderDashboardController::class, 'reset_password'])->name('resetPassword');
-    Route::post('dashboard/on_vote/{id}', [ShareholderDashboardController::class, 'on_vote'])->name('onVote');
+    Route::put('dashboard/reset_password', [ShareholderDashboardController::class, 'reset_password'])->name('resetPassword');
+    Route::get('dashboard/on_vote/{id}', [ShareholderDashboardController::class, 'on_vote'])->name('onVote');
+    Route::get('dashboard/logout', [ShareholderDashboardController::class, 'logout'])->name('logout');
 });
 
 

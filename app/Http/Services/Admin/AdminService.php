@@ -5,7 +5,10 @@ use App\Models\Admin;
 use App\Models\Shareholder;
 use App\Models\VoteItem;
 use App\Models\Company;
+use App\Models\VoteCount;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class AdminService 
 {
@@ -18,12 +21,13 @@ class AdminService
         }
     }
 
-    public function reset_password(string $password, int $id)
+    public function reset_password(string $old_password, string $new_password, int $id)
     {
+        $hashed_new_password = Hash::make($new_password);
         $admin = Admin::find($id);
-        $isUpdated = $admin->update(['password' => $password]);
-        if($isUpdated) {
-            return $isUpdated;
+        if(Hash::check($old_password, $admin->password)) {
+            $isPasswordUpdated = $admin->update(['password' => $hashed_new_password]);
+            return $isPasswordUpdated;
         }
     }
 
@@ -34,9 +38,10 @@ class AdminService
     }
 
     // --> shareholders
-    public function create_shareholder($credentials)
+    public function create_shareholder(array $credentials, int $id)
     {
-        $shareholder = Shareholder::create($credentials);
+        $admin = Admin::find($id);
+        $shareholder = $admin->shareholders()->create($credentials);
         if(isset($shareholder)) {
             return $shareholder;
         }
@@ -58,9 +63,10 @@ class AdminService
 
 
     // --> vote items
-    public function create_vote(array $credentials)
+    public function create_vote(array $credentials, int $id)
     {
-        $vote_item = VoteItem::create($credentials);
+        $admin = Admin::find($id);
+        $vote_item = $admin->vote_items()->create($credentials);
         if(isset($vote_item)) {
             return $vote_item;
         }
@@ -85,10 +91,19 @@ class AdminService
 
     public function delete_vote(int $id)
     {
-        $vote_item = voteItem::find($id);
+        $vote_item = VoteItem::find($id);
         $isDeletevote_item = $vote_item->delete();
         if($isDeleteVote) {
             return $isDeleteVote;
         }
+    }
+
+    public function read_vote_counts()
+    {
+        $distinct_votes = DB::table('vote_counts')->select('created_at', 'shareholder_id', 'vote_item_id', DB::raw('SUM(votes) as total_votes'))
+        ->groupBy('shareholder_id')
+        ->groupBy('vote_item_id')
+        ->groupBy('created_at')
+        ->get();
     }
 }

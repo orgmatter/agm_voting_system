@@ -2,75 +2,21 @@
 and (min-width : 1024px) 
 and (max-width : 1839px) {
     
-    .login-content-container {
+    .dashboard-content-container {
         width: 100%;
-        height: 100vh;
-        border: 2px solid red;
 
-        .login-content-cover {
+        .dashboard-content-cover {
             width: 100%;
-            height: 100%;
 
-            .login-form-cover-flex {
+            .dashboard-content-cover-flex {
                 width: 100%;
-                height: 100%;
                 display: flex;
                 justify-content: center;
-                align-items: center;
 
-                .login-form-cover-item {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    width: 35%;
-                    height: 55%;
-                    border: 1px solid lightgrey;
-                    border-radius: 5px;
-
-                    .login-form-cover {
-                        width: 80%;
-                        height: 80%;
-
-                        .login-form {
-                            width: 100%;
-                            // border: 1px solid green;
-
-                            .login-input-cover-flex {
-                                display: flex;
-                                flex-direction: column;
-                                width: 100%;
-
-                                .login-input-cover-item {
-                                    width: 100%;
-                                    padding-top: 25px;
-
-                                    label {
-                                        font-size: 1rem;
-                                        font-weight: 600;
-                                    }
-
-                                    .login-input {
-                                        width: 100%;
-                                        height: 35px;
-                                    }
-                                }
-                            }
-                            .btn-cover-flex {
-                                width: 100%;
-                                display: flex;
-                                justify-content: center;
-                                padding-top: 35px;
-
-                                .btn-cover-item {
-                                    width: 100%;
-
-                                    .input-btn {
-                                        width: 100%;
-                                    }
-                                }
-                            }
-                        }
-                    }
+                .dashboard-content-cover-item {
+                    width: 80%;
+                    border: 1px solid red;
+                    height: 100vh;
                 }
             }
         }

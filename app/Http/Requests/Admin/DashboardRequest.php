@@ -15,13 +15,13 @@ class DashboardRequest extends FormRequest
      */
     public function authorize()
     {
-        $vote_item = VoteItem::find(route('item'));
-        $shareholder = VoteItem::find(route('shareholder'));
+        // $vote_item = VoteItem::find(route('item'));
+        // $shareholder = VoteItem::find(route('shareholder'));
 
-        $isAllowed1 = $this->user()->any(['create', 'view', 'view-any', 'update-admin']);
-        $isAllowed2 = $this->user()->can('update-shareholder-isEligible', $shareholder);
+        // $isAllowed1 = $this->user()->any(['create', 'view', 'view-any', 'update-admin']);
+        // $isAllowed2 = $this->user()->can('update-shareholder-isEligible', $shareholder);
 
-        return $isAllowed1 === $isAllowed2;
+        return true;
     }
 
     /**
