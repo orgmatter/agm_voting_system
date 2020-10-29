@@ -222,7 +222,6 @@
                                                                         <th scope="col">Email</th>
                                                                         <th scope="col">Units</th>
                                                                         <th scope="col">Compnay</th>
-                                                                        <!-- <th scope="col" colspan="2">Action</th> -->
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -234,9 +233,7 @@
                                                                                 <td>{{ $shareholder->lastname }}</td>
                                                                                 <td>{{ $shareholder->email }}</td>
                                                                                 <td>{{ $shareholder->units }}</td>
-                                                                                <td>{{ $companies[$shareholder->company_id]['name'] }}</td>
-                                                                                <!-- <td>Button 1</td>
-                                                                                <td>Button 2</td> -->
+                                                                                <td>{{ $companies->find($shareholder->company_id)->name }}</td>
                                                                             </tr>
                                                                         @endforeach
                                                                     @endif
@@ -257,7 +254,6 @@
                                                                         <th scope="col">#</th>
                                                                         <th scope="col">Name of Vote</th>
                                                                         <th scope="col">Compnay</th>
-                                                                        <!-- <th scope="col" colspan="2">Action</th> -->
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -266,9 +262,7 @@
                                                                             <tr>
                                                                                 <th scope="row"></th>
                                                                                 <td>{{ $vote_item->name }}</td>
-                                                                                <td>{{ $companies[$vote_item->company_id]['name'] }}</td>
-                                                                                <!-- <td>Button 1</td>
-                                                                                <td>Button 2</td> -->
+                                                                                <td>{{ $companies->find($vote_item->company_id)->name }}</td>
                                                                             </tr>
                                                                         @endforeach
                                                                     @endif
@@ -291,9 +285,9 @@
                                                                                 <th scope="col">#</th>
                                                                                 <th scope="col">Name of  Shareholder</th>
                                                                                 <th scope="col">Name of Votes</th>
-                                                                                <th scope="col">Total units</th>
+                                                                                <th scope="col">Total Units</th>
                                                                                 <th scope="col">Votes Casted</th>
-                                                                                <th scope="col">Unit bal</th>
+                                                                                <th scope="col">Unit Bal</th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
