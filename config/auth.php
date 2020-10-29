@@ -35,6 +35,8 @@ return [
     |
     */
 
+    // added more authentication guards for admins and shareholder
+
     'guards' => [
         'web' => [
             'driver' => 'session',

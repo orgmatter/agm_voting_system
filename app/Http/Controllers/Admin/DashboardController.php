@@ -24,15 +24,11 @@ class DashboardController extends Controller
 
     public function dashboard() {
 
-        // $companies = Company::all();
-
         $companies = $this->adminService->read_companies();
         $shareholders = $this->adminService->read_shareholders();
         $vote_items = $this->adminService->read_vote_items();
         $distinct_votes = $this->adminService->read_vote_counts();
         $admin = Auth::guard('admin')->user();
-
-        // return $distinct_votes;
 
         return view('admin.dashboard', ['companies' => $companies, 'shareholders' => $shareholders, 'vote_items' => $vote_items, 'distinct_votes' => $distinct_votes, 'admin' => $admin]);
     }

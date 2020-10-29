@@ -13,7 +13,8 @@ class DashboardController extends Controller
     private $shareholderService;
 
     public function __construct(ShareholderService $shareholderService) {
-        // $this->middleware('auth:shareholder');
+        
+        $this->middleware('auth:shareholder');
         $this->shareholderService = $shareholderService;
     }
 
@@ -45,7 +46,6 @@ class DashboardController extends Controller
         ];
         $shareholder_bal = $this->shareholderService->on_vote($credentials, $user_id);
         if($shareholder_bal) {
-            // return back()->with(['shareholder_bal' => $shareholder_bal]);
             return redirect()->route('shareholder.dashboard');
         }
     }

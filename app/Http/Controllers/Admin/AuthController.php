@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+// This controller determines an authenticated request to the admin resources 
+
 class AuthController extends Controller
 {
 

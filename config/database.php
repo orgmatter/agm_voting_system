@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Str;
 
-
+// setting up database connection for heroku using CLEARDB
 $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
 $host = $url["host"];

@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Shareholder;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+
+// This controller determines an authenticated request to the shareholder resources
+
 class AuthController extends Controller
 {
     public function checkShareholderAuth()
