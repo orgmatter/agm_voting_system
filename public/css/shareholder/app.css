@@ -2,7 +2,6 @@
   .login-content-container {
     width: 100%;
     height: 100vh;
-    border: 2px solid red;
   }
 
   .login-content-container .login-content-cover {
@@ -10,7 +9,7 @@
     height: 100%;
   }
 
-  .login-content-container .login-content-cover .login-form-cover-flex {
+  .login-content-container .login-content-cover .parent-login-form-cover-flex {
     width: 100%;
     height: 100%;
     display: flex;
@@ -18,58 +17,81 @@
     align-items: center;
   }
 
-  .login-content-container .login-content-cover .login-form-cover-flex .login-form-cover-item {
+  .login-content-container .login-content-cover .parent-login-form-cover-flex .parent-login-form-cover-item {
+    width: 35%;
+    height: 55%;
+    border-radius: 5px;
+  }
+
+  .login-content-container .login-content-cover .parent-login-form-cover-flex .parent-login-form-cover-item .form-header {
+    width: 100%;
+  }
+
+  .login-content-container .login-content-cover .parent-login-form-cover-flex .parent-login-form-cover-item .form-header .header-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+
+  .login-content-container .login-content-cover .parent-login-form-cover-flex .parent-login-form-cover-item .login-form-cover-flex {
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 35%;
-    height: 55%;
+  }
+
+  .login-content-container .login-content-cover .parent-login-form-cover-flex .parent-login-form-cover-item .login-form-cover-flex .login-form-cover-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
     border: 1px solid lightgrey;
     border-radius: 5px;
   }
 
-  .login-content-container .login-content-cover .login-form-cover-flex .login-form-cover-item .login-form-cover {
+  .login-content-container .login-content-cover .parent-login-form-cover-flex .parent-login-form-cover-item .login-form-cover-flex .login-form-cover-item .login-form-cover {
     width: 80%;
     height: 80%;
   }
 
-  .login-content-container .login-content-cover .login-form-cover-flex .login-form-cover-item .login-form-cover .login-form {
+  .login-content-container .login-content-cover .parent-login-form-cover-flex .parent-login-form-cover-item .login-form-cover-flex .login-form-cover-item .login-form-cover .login-form {
     width: 100%;
   }
 
-  .login-content-container .login-content-cover .login-form-cover-flex .login-form-cover-item .login-form-cover .login-form .login-input-cover-flex {
+  .login-content-container .login-content-cover .parent-login-form-cover-flex .parent-login-form-cover-item .login-form-cover-flex .login-form-cover-item .login-form-cover .login-form .login-input-cover-flex {
     display: flex;
     flex-direction: column;
     width: 100%;
   }
 
-  .login-content-container .login-content-cover .login-form-cover-flex .login-form-cover-item .login-form-cover .login-form .login-input-cover-flex .login-input-cover-item {
+  .login-content-container .login-content-cover .parent-login-form-cover-flex .parent-login-form-cover-item .login-form-cover-flex .login-form-cover-item .login-form-cover .login-form .login-input-cover-flex .login-input-cover-item {
     width: 100%;
     padding-top: 25px;
   }
 
-  .login-content-container .login-content-cover .login-form-cover-flex .login-form-cover-item .login-form-cover .login-form .login-input-cover-flex .login-input-cover-item label {
+  .login-content-container .login-content-cover .parent-login-form-cover-flex .parent-login-form-cover-item .login-form-cover-flex .login-form-cover-item .login-form-cover .login-form .login-input-cover-flex .login-input-cover-item label {
     font-size: 1rem;
     font-weight: 600;
   }
 
-  .login-content-container .login-content-cover .login-form-cover-flex .login-form-cover-item .login-form-cover .login-form .login-input-cover-flex .login-input-cover-item .login-input {
+  .login-content-container .login-content-cover .parent-login-form-cover-flex .parent-login-form-cover-item .login-form-cover-flex .login-form-cover-item .login-form-cover .login-form .login-input-cover-flex .login-input-cover-item .login-input {
     width: 100%;
     height: 35px;
   }
 
-  .login-content-container .login-content-cover .login-form-cover-flex .login-form-cover-item .login-form-cover .login-form .btn-cover-flex {
+  .login-content-container .login-content-cover .parent-login-form-cover-flex .parent-login-form-cover-item .login-form-cover-flex .login-form-cover-item .login-form-cover .login-form .btn-cover-flex {
     width: 100%;
     display: flex;
     justify-content: center;
     padding-top: 35px;
   }
 
-  .login-content-container .login-content-cover .login-form-cover-flex .login-form-cover-item .login-form-cover .login-form .btn-cover-flex .btn-cover-item {
+  .login-content-container .login-content-cover .parent-login-form-cover-flex .parent-login-form-cover-item .login-form-cover-flex .login-form-cover-item .login-form-cover .login-form .btn-cover-flex .btn-cover-item {
     width: 100%;
   }
 
-  .login-content-container .login-content-cover .login-form-cover-flex .login-form-cover-item .login-form-cover .login-form .btn-cover-flex .btn-cover-item .input-btn {
+  .login-content-container .login-content-cover .parent-login-form-cover-flex .parent-login-form-cover-item .login-form-cover-flex .login-form-cover-item .login-form-cover .login-form .btn-cover-flex .btn-cover-item .input-btn {
     width: 100%;
   }
 }
