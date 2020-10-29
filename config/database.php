@@ -97,18 +97,18 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
-
-            'heroku_mysql_connection' => array(
-                'driver' => 'mysql',
-                'host' => $host,
-                'database' => $database,
-                'username' => $username,
-                'password' => $password,
-                'charset' => 'utf8',
-                'collation' => 'utf8_unicode_ci',
-                'prefix' => '',
-            ),
             
+        ],
+
+        'heroku_mysql_connection' => [
+            'driver' => 'mysql',
+            'host' => $host,
+            'database' => $database,
+            'username' => $username,
+            'password' => $password,
+            'charset' => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix' => '',
         ],
 
     ],
