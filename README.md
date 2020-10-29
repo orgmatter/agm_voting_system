@@ -1,3 +1,5 @@
+# For Instructions, please see the buttom of this page.
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
@@ -59,4 +61,45 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# agm_voting_system
+
+# AGM Voting System
+
+## Introducttion
+
+This is an application that allows shareholders to cast their votes on several items listed in an annual general meeting.
+Shareholders are to cast their votes based on the amount of shares or units of shares they have per item.
+
+## Application Usage
+
+To use this application you should either start by doing any of the below steps:
+
+- Pull or clone the repository here <em>https://github.com/orgmatter/agm_voting_system.git</em> and run on your local machine having the latest php and laravel already installed
+- Visit the demo app which is hosted on heroku, see link below:
+ - <em>http://agm-voting-app.herokuapp.com/admin</em> for admin use login with:
+  - email:
+   - "admin@mail.com"
+  - password:
+   - "password"
+- After login in you can browse the page by managing shareholders and vote items
+- When you a new shareholder, you can see the list by clicking the "views" tab.
+- Also to test the new shareholder account you just created, you may logout and use the link below
+- <em>http://agm-voting-app.herokuapp.com/shareholder</em> for shareholder use login with the account credentials you created on the admin page.
+- Once logged in to the shareholder page, you may perform several operations such as "password reset" and "voting"
+
+## Code Descriptions
+- The entire application came together using several implementations such as:
+  - Controllers
+  - Routes
+  - Database migrations
+  - Models
+  - Factories
+  - Database seeds
+  - Services for dependency injections
+  - Authentication guards
+  - Middlewares
+  - Gates and Policies for authorization
+  - Sass for frontend styling
+
+Thanks for your review, am always open to if you have any contributions aor areas I should've done better.
+You can reach me on my email: <em>orgmatter@gmail.com</em> or call: <em>08167206219</em>
+
