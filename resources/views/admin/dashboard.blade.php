@@ -22,7 +22,7 @@
                             <div class="col-3 sidenav-col">
                                 <ul class="nav flex-column nav-tabs" id="myTab" role="tablist" aria-orientation="vertical">
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="create-tab" data-toggle="tab" href="#create" role="tab" aria-controls="create" aria-selected="false">Create</a>
+                                        <a class="nav-link active" id="create-tab" data-toggle="tab" href="#create" role="tab" aria-controls="create" aria-selected="false">Create</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
                                         <a class="nav-link" id="views-tab" data-toggle="tab" href="#views" role="tab" aria-controls="views" aria-selected="false">Views</a>
@@ -34,13 +34,13 @@
                                         <a class="nav-link" id="reports-tab" data-toggle="tab" href="#reports" role="tab" aria-controls="reports" aria-selected="false">Reports</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link active" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="true">Settings</a>
+                                        <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="true">Settings</a>
                                     </li>
                                 </ul>
                             </div>
                             <div class="col-9 sidenav-content-col">
                                 <div class="tab-content" id="tabContent">
-                                    <div class="tab-pane fade" id="create" role="tabpanel" aria-labelledby="create-tab">
+                                    <div class="tab-pane fade show active" id="create" role="tabpanel" aria-labelledby="create-tab">
                                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                                             <li class="nav-item" role="presentation">
                                                 <a class="nav-link active" id="create-shareholders-tab" data-toggle="tab" href="#create-shareholders" role="tab" aria-controls="shareholders" aria-selected="true">Shareholders</a>
@@ -314,7 +314,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade show active" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+                                    <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
                                         <div class="settings-form-container">
 
                                             <div class="parent-settings-form-cover">

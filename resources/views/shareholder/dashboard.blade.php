@@ -22,16 +22,53 @@
                             <div class="col-3 sidenav-col">
                                 <ul class="nav flex-column nav-tabs" id="myTab" role="tablist" aria-orientation="vertical">
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link active" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="true">Settings</a>
+                                        <a class="nav-link active" id="views-tab" data-toggle="tab" href="#views" role="tab" aria-controls="views" aria-selected="false">Views</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="views-tab" data-toggle="tab" href="#views" role="tab" aria-controls="views" aria-selected="false">Views</a>
+                                        <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="true">Settings</a>
                                     </li>
                                 </ul>
                             </div>
                             <div class="col-9 sidenav-content-col">
                                 <div class="tab-content" id="tabContent">
-                                    <div class="tab-pane fade show active" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+                                    <div class="tab-pane fade show active" id="views" role="tabpanel" aria-labelledby="views-tab">
+                                        <div class="vote-items-cover-flex">
+                                            <div class="vote-item-cover-item">
+                                                <div class="text-header-cover">
+                                                    @if($shareholder && $shareholder->units > 1)
+                                                        <p class="shareholder-unit-text">You have {{ $shareholder->units }} coins left to vote</p>
+                                                    @else
+                                                        <p class="shareholder-unit-text">You have {{ $shareholder->units }} coins left to vote.</p>
+                                                    @endif
+                                                </div>
+                                                <div class="vote-items-list-cover">
+                                                    <div class="vote-items-list-flex">
+                                                        <div class="vote-items-list-item">
+                                                            @if($company_votes)
+                                                                @foreach($company_votes as $company_vote)
+                                                                    <div class="list-item-flex">
+                                                                        <div class="list-item-item" id="vote-name">
+                                                                            <p class="vote-name-text">{{ $company_vote->name }}</p>
+                                                                        </div>
+                                                                        <div class="list-item-item" id="vote-action">
+                                                                            @if($shareholder && $shareholder->units > 1)
+                                                                                <div class="vote-action-flex">
+                                                                                    <div class="vote-action-item">
+                                                                                        <a class="vote-action-btn btn btn-primary" href="{{ route('shareholder.onVote', ['id' => $company_vote->id]) }}">{{ $shareholder->units }} Vote</a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            @endif 
+                                                                        </div>
+                                                                    </div>
+                                                                @endforeach
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
                                         <div class="settings-form-container">
 
                                             <div class="parent-settings-form-cover">
@@ -65,43 +102,6 @@
                                                                     </div>
                                                                 </div>
                                                             </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="views" role="tabpanel" aria-labelledby="views-tab">
-                                        <div class="vote-items-cover-flex">
-                                            <div class="vote-item-cover-item">
-                                                <div class="text-header-cover">
-                                                    @if($shareholder && $shareholder->units > 1)
-                                                        <p class="shareholder-unit-text">You have {{ $shareholder->units }} coins left to vote</p>
-                                                    @else
-                                                        <p class="shareholder-unit-text">You have {{ $shareholder->units }} coins left to vote.</p>
-                                                    @endif
-                                                </div>
-                                                <div class="vote-items-list-cover">
-                                                    <div class="vote-items-list-flex">
-                                                        <div class="vote-items-list-item">
-                                                            @if($company_votes)
-                                                                @foreach($company_votes as $company_vote)
-                                                                    <div class="list-item-flex">
-                                                                        <div class="list-item-item" id="vote-name">
-                                                                            <p class="vote-name-text">{{ $company_vote->name }}</p>
-                                                                        </div>
-                                                                        <div class="list-item-item" id="vote-action">
-                                                                            @if($shareholder && $shareholder->units > 1)
-                                                                                <div class="vote-action-flex">
-                                                                                    <div class="vote-action-item">
-                                                                                        <a class="vote-action-btn btn btn-primary" href="{{ route('shareholder.onVote', ['id' => $company_vote->id]) }}">{{ $shareholder->units }} Vote</a>
-                                                                                    </div>
-                                                                                </div>
-                                                                            @endif 
-                                                                        </div>
-                                                                    </div>
-                                                                @endforeach
-                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
