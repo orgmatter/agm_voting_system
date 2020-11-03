@@ -22,9 +22,6 @@
                             <div class="col-3 sidenav-col">
                                 <ul class="nav flex-column nav-tabs" id="myTab" role="tablist" aria-orientation="vertical">
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link active" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="true">Settings</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
                                         <a class="nav-link" id="create-tab" data-toggle="tab" href="#create" role="tab" aria-controls="create" aria-selected="false">Create</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
@@ -36,50 +33,13 @@
                                     <li class="nav-item" role="presentation">
                                         <a class="nav-link" id="reports-tab" data-toggle="tab" href="#reports" role="tab" aria-controls="reports" aria-selected="false">Reports</a>
                                     </li>
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link active" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="true">Settings</a>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="col-9 sidenav-content-col">
                                 <div class="tab-content" id="tabContent">
-                                    <div class="tab-pane fade show active" id="settings" role="tabpanel" aria-labelledby="settings-tab">
-                                        <div class="settings-form-container">
-
-                                            <div class="parent-settings-form-cover">
-                                                <div class="form-header">
-                                                    <p class="header-title">Reset Password</p>
-                                                </div>
-                                                <div class="settings-form-cover-flex">
-                                                    <div class="settings-form-cover-item">
-                                                        @if((session()->has('password_reset')) && (session()->get('password_reset') === 'password is reset'))
-                                                            <div class="alert alert-success">
-                                                                {{ session()->get('password_reset') }}
-                                                            </div>
-                                                        @endif
-                                                        <div class="form-cover-div">
-                                                            <form class="form-cover" id="setting-form" action="{{ route('admin.resetPassword') }}" method="post">
-                                                                @csrf
-                                                                @method('put')
-                                                                <div class="input-cover-flex">
-                                                                    <div class="input-cover-item">
-                                                                        <label for="old-password-input">Old Password:</label><br />
-                                                                        <input class="setting-input" id="old-password-input" type="password" name="old_password" placeholder="Old Password" required>
-                                                                    </div>
-                                                                    <div class="input-cover-item">
-                                                                        <label for="new-password-input">New Password:</label><br />
-                                                                        <input class="setting-input" id="new-password-input" type="password" name="new_password" placeholder="New Password" required>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="submit-btn-flex">
-                                                                    <div class="submit-btn-item">
-                                                                        <button class="submit-btn btn btn-primary" type="submit">Submit</button>
-                                                                    </div>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div class="tab-pane fade" id="create" role="tabpanel" aria-labelledby="create-tab">
                                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                                             <li class="nav-item" role="presentation">
@@ -351,6 +311,46 @@
                                                         </div>
                                                     @endforeach
                                                 @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade show active" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+                                        <div class="settings-form-container">
+
+                                            <div class="parent-settings-form-cover">
+                                                <div class="form-header">
+                                                    <p class="header-title">Reset Password</p>
+                                                </div>
+                                                <div class="settings-form-cover-flex">
+                                                    <div class="settings-form-cover-item">
+                                                        @if((session()->has('password_reset')) && (session()->get('password_reset') === 'password is reset'))
+                                                            <div class="alert alert-success">
+                                                                {{ session()->get('password_reset') }}
+                                                            </div>
+                                                        @endif
+                                                        <div class="form-cover-div">
+                                                            <form class="form-cover" id="setting-form" action="{{ route('admin.resetPassword') }}" method="post">
+                                                                @csrf
+                                                                @method('put')
+                                                                <div class="input-cover-flex">
+                                                                    <div class="input-cover-item">
+                                                                        <label for="old-password-input">Old Password:</label><br />
+                                                                        <input class="setting-input" id="old-password-input" type="password" name="old_password" placeholder="Old Password" required>
+                                                                    </div>
+                                                                    <div class="input-cover-item">
+                                                                        <label for="new-password-input">New Password:</label><br />
+                                                                        <input class="setting-input" id="new-password-input" type="password" name="new_password" placeholder="New Password" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="submit-btn-flex">
+                                                                    <div class="submit-btn-item">
+                                                                        <button class="submit-btn btn btn-primary" type="submit">Submit</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
